@@ -7,6 +7,7 @@ class Presenter(var view: MainContract.View?, var interactor: MainContract.Inter
 
     override fun onRefresh() {
         view?.toggleProgress(true)
+        interactor?.latest(this)
     }
 
     override fun requestData() {
