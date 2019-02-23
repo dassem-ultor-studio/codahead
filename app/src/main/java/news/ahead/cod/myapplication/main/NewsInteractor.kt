@@ -7,9 +7,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class NewsInteractor : MainContract.MainInteractor {
+class NewsInteractor : MainContract.Interactor {
 
-    override fun latest(callback: MainContract.MainInteractor.ResponseCallback) {
+    override fun latest(callback: MainContract.Interactor.ResponseCallback) {
         val retrofit = APIClient.client() ?: return
 
         val service = retrofit.create(NewsService::class.java)

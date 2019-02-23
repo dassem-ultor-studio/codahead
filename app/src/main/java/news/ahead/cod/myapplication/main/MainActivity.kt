@@ -9,7 +9,7 @@ import news.ahead.cod.myapplication.adapter.NewsAdapter
 import news.ahead.cod.myapplication.extensions.setVisibility
 import news.ahead.cod.myapplication.model.Article
 
-class MainActivity : AppCompatActivity(), MainContract.MainView {
+class MainActivity : AppCompatActivity(), MainContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
