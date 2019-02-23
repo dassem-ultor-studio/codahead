@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.news_view_holder.view.*
 import news.ahead.cod.myapplication.R
+import news.ahead.cod.myapplication.extensions.loadImageRoundedCorners
 import news.ahead.cod.myapplication.model.Article
 
 class NewsAdapter(private val list: List<Article>,
@@ -20,8 +21,11 @@ class NewsAdapter(private val list: List<Article>,
     override fun getItemCount(): Int = list.size
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
-        holder.itemView.newsViewHolder_title.text = list[position].title
-        holder.itemView.setOnClickListener { itemClickHandler(list[position]) }
+        val article = list[position]
+        holder.itemView.newsViewHolder_title.text = article.title
+        holder.itemView.newsViewHolder_image.loadImageRoundedCorners(article.urlToImage)
+        holder.itemView.newsViewHolder_description.text = article.description
+        holder.itemView.setOnClickListener { itemClickHandler(article) }
     }
 
     class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
