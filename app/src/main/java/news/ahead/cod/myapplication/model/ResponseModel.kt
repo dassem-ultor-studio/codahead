@@ -1,6 +1,6 @@
 package news.ahead.cod.myapplication.model
 
-data class Articles(
+data class ResponseModel(
     val articles: List<Article>,
     val status: String,
     val totalResults: Int
