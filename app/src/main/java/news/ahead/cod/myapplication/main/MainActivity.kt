@@ -10,10 +10,14 @@ import news.ahead.cod.myapplication.extensions.setVisibility
 import news.ahead.cod.myapplication.model.Article
 
 class MainActivity : AppCompatActivity(), MainContract.View {
+
+    private val presenter: MainContract.Presenter = Presenter(this, NewsInteractor())
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        presenter.requestData()
     }
 
     override fun toggleProgress(shouldShowProgress: Boolean) {
