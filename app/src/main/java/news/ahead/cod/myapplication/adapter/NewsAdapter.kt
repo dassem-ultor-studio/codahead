@@ -8,7 +8,8 @@ import kotlinx.android.synthetic.main.news_view_holder.view.*
 import news.ahead.cod.myapplication.R
 import news.ahead.cod.myapplication.model.Article
 
-class NewsAdapter(val list: List<Article>, val itemClickHandler: (Article) -> Unit) :
+class NewsAdapter(private val list: List<Article>,
+                  private val itemClickHandler: (Article) -> Unit) :
         RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -20,6 +21,7 @@ class NewsAdapter(val list: List<Article>, val itemClickHandler: (Article) -> Un
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
         holder.itemView.newsViewHolder_title.text = list[position].title
+        holder.itemView.setOnClickListener { itemClickHandler(list[position]) }
     }
 
     class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
