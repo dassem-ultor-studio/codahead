@@ -2,7 +2,7 @@ package news.ahead.cod.myapplication.main
 
 import news.ahead.cod.myapplication.model.Article
 
-class Presenter(var view: MainContract.View?, var interactor: MainContract.Interactor?) :
+class Presenter(private var view: MainContract.View?, private var interactor: MainContract.Interactor?) :
         MainContract.Presenter, MainContract.Interactor.ResponseCallback {
 
     override fun onRefresh() {
