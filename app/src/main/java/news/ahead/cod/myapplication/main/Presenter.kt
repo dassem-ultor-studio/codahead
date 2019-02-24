@@ -24,6 +24,10 @@ class Presenter(private var view: MainContract.View?, private var interactor: Ma
         interactor?.latest(true, currentPage, this)
     }
 
+    override fun onItemClick(article: Article) {
+        view?.showDetailsActivity(article)
+    }
+
     override fun onResponse(append: Boolean, articles: List<Article>) {
         val view = view ?: return
 

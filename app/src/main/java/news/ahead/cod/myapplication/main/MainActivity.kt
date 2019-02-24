@@ -1,10 +1,12 @@
 package news.ahead.cod.myapplication.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import news.ahead.cod.myapplication.adapter.NewsAdapter
+import news.ahead.cod.myapplication.article_detail.ArticleDetailsActivity
 import news.ahead.cod.myapplication.extensions.setVisibility
 import news.ahead.cod.myapplication.helpers.NewsScrollListener
 import news.ahead.cod.myapplication.model.Article
@@ -35,7 +37,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     }
 
     override fun updateList(articles: List<Article>) {
-        mainActivity_recyclerView.adapter = NewsAdapter(articles.toMutableList()) {}
+        mainActivity_recyclerView.adapter = NewsAdapter(articles.toMutableList(), presenter::onItemClick)
     }
 
     override fun onError(error: Throwable) {
@@ -44,6 +46,12 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     override fun appendItems(articles: List<Article>) {
         (mainActivity_recyclerView.adapter as? NewsAdapter)?.appendItems(articles)
+    }
+
+    override fun showDetailsActivity(article: Article) {
+        val myIntent = Intent(this, ArticleDetailsActivity::class.java)
+        myIntent.putExtra("article", article)
+        startActivity(myIntent)
     }
 
     override fun onDestroy() {
