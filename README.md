@@ -12,3 +12,5 @@ dagger and I forgot how difficult it is to setup, I gave up and went on with mor
 Future improvements:
 - store the lists in sqllite/room/realm database so it's possible to use app offline
 - add dependency injection
+
+Sorry for two contributors, I've had some weird problems with git account credentials
