@@ -16,6 +16,8 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     private val presenter: MainContract.Presenter = Presenter(this, NewsInteractor())
 
+    private var toast: Toast? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(news.ahead.cod.myapplication.R.layout.activity_main)
@@ -44,7 +46,11 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     }
 
     override fun onError(error: Throwable) {
-        Toast.makeText(this, error.localizedMessage, Toast.LENGTH_SHORT).show()
+        if (toast != null) {
+            toast?.cancel()
+        }
+        toast = Toast.makeText(this, error.localizedMessage, Toast.LENGTH_SHORT)
+        toast?.show()
     }
 
     override fun appendItems(articles: List<Article>) {
