@@ -6,7 +6,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 import news.ahead.cod.myapplication.R
 
-fun ImageView.loadImageRoundedCorners(url: String) {
+fun ImageView.loadImageRoundedCorners(url: String?) {
     Glide.with(this)
             .load(url)
             .transform(CenterCrop(), RoundedCornersTransformation(12, 0))
