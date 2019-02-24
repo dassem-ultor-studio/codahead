@@ -2,9 +2,7 @@
 
 me) specifically mentions that he did not use mvp in a long time
 
-others) let's checkout how well he knows mvp
-
-:D
+others) let's checkout how well he knows mvp :D
 
 Limitations:
 - no dependency injection, which means the view creates the presenter (separation of concerns, testability) - It's been a while since I used
