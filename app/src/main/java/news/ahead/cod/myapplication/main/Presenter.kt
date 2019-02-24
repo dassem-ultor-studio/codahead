@@ -49,7 +49,7 @@ class Presenter(private var view: MainContract.View?, private var interactor: Ma
 
         view.onError(error)
         view.toggleLoadingProgress(false)
-        view.toggleRefreshProgress(true)
+        view.toggleRefreshProgress(false)
     }
 
     override fun onDestroy() {
