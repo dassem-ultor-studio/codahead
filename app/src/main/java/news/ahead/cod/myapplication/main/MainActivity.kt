@@ -2,12 +2,11 @@ package news.ahead.cod.myapplication.main
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import news.ahead.cod.myapplication.adapter.NewsAdapter
 import news.ahead.cod.myapplication.extensions.setVisibility
+import news.ahead.cod.myapplication.helpers.NewsScrollListener
 import news.ahead.cod.myapplication.model.Article
 
 
@@ -22,22 +21,9 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         presenter.requestData()
         mainActivity_refreshControl.setOnRefreshListener { presenter.onRefresh() }
 
-        mainActivity_recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                val visibleItemCount = recyclerView.layoutManager.childCount
-                val totalItemCount = recyclerView.layoutManager.itemCount
-                val firstVisibleItemPosition = (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
-
-                if (!mainActivity_refreshControl.isRefreshing) {
-                    if (visibleItemCount + firstVisibleItemPosition >= totalItemCount - PagingInfo.loadPageMargin
-                            && firstVisibleItemPosition >= 0
-                            && totalItemCount >= PagingInfo.pageSize) {
-                        presenter.loadNextPage()
-                    }
-                }
-            }
-        })
+        mainActivity_recyclerView.addOnScrollListener(NewsScrollListener(
+                isRefreshing = { mainActivity_refreshControl.isRefreshing },
+                nextPageLoadHandler = { presenter.loadNextPage() }))
     }
 
     override fun toggleLoadingProgress(isLoading: Boolean) {
