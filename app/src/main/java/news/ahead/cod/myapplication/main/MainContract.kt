@@ -8,6 +8,7 @@ interface MainContract {
         fun onRefresh()
         fun requestData()
         fun loadNextPage()
+        fun onItemClick(article: Article)
     }
 
     interface View {
@@ -16,6 +17,7 @@ interface MainContract {
         fun updateList(articles: List<Article>)
         fun onError(error: Throwable)
         fun appendItems(articles: List<Article>)
+        fun showDetailsActivity(article: Article)
     }
 
     interface Interactor {
