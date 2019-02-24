@@ -9,16 +9,16 @@ import retrofit2.Response
 
 class NewsInteractor : MainContract.Interactor {
 
-    override fun latest(callback: MainContract.Interactor.ResponseCallback) {
+    override fun latest(append: Boolean, page: Int, callback: MainContract.Interactor.ResponseCallback) {
         val retrofit = APIClient.client() ?: return
 
         val service = retrofit.create(NewsService::class.java)
 
-        service.latestNews().enqueue(object : Callback<ResponseModel> {
+        service.latestNews(page = page).enqueue(object : Callback<ResponseModel> {
             override fun onResponse(call: Call<ResponseModel>, response: Response<ResponseModel>) {
                 val articles = response.body()?.articles ?: return
 
-                callback.onResponse(articles)
+                callback.onResponse(append, articles)
             }
 
             override fun onFailure(call: Call<ResponseModel>, error: Throwable) {
