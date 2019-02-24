@@ -18,10 +18,12 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         setContentView(R.layout.activity_main)
 
         presenter.requestData()
+        mainActivity_refreshControl.setOnRefreshListener { presenter.onRefresh() }
     }
 
     override fun toggleProgress(shouldShowProgress: Boolean) {
         mainActivity_progressBar.setVisibility(shouldShowProgress)
+        mainActivity_refreshControl.isRefreshing = shouldShowProgress
     }
 
     override fun updateList(articles: List<Article>) {
@@ -32,4 +34,8 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         Toast.makeText(this, error.localizedMessage, Toast.LENGTH_SHORT).show()
     }
 
+    override fun onDestroy() {
+        presenter.onDestroy()
+        super.onDestroy()
+    }
 }
