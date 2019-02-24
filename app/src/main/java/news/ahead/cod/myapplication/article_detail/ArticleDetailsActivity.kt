@@ -15,11 +15,14 @@ class ArticleDetailsActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val article = intent.getParcelableExtra<Article?>("article") ?: return
+        updateUI()
+    }
 
+    private fun updateUI() {
+        val article = intent.getParcelableExtra<Article?>("article") ?: return
         articleDetails_image.loadImage(article.urlToImage)
         articleDetails_title.text = article.title
-        supportActionBar?.title =article.title
+        supportActionBar?.title = article.title
         articleDetails_description.text = article.description
     }
 
