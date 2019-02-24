@@ -9,7 +9,7 @@ import news.ahead.cod.myapplication.R
 import news.ahead.cod.myapplication.extensions.loadImageRoundedCorners
 import news.ahead.cod.myapplication.model.Article
 
-class NewsAdapter(private val list: List<Article>,
+class NewsAdapter(private val list: MutableList<Article>,
                   private val itemClickHandler: (Article) -> Unit) :
         RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
@@ -26,6 +26,11 @@ class NewsAdapter(private val list: List<Article>,
         holder.itemView.newsViewHolder_image.loadImageRoundedCorners(article.urlToImage)
         holder.itemView.newsViewHolder_description.text = article.description
         holder.itemView.setOnClickListener { itemClickHandler(article) }
+    }
+
+    fun appendItems(list: List<Article>) {
+        this.list.addAll(list)
+        notifyDataSetChanged()
     }
 
     class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
