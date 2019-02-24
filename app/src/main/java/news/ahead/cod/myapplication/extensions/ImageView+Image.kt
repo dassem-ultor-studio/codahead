@@ -13,3 +13,10 @@ fun ImageView.loadImageRoundedCorners(url: String?) {
             .placeholder(R.drawable.ic_launcher_background)
             .into(this)
 }
+fun ImageView.loadImage(url: String?) {
+    Glide.with(this)
+            .load(url)
+            .placeholder(R.drawable.ic_launcher_background)
+            .into(this)
+}
+
