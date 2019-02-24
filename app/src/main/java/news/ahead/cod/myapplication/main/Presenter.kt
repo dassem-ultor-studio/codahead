@@ -31,6 +31,10 @@ class Presenter(private var view: MainContract.View?, private var interactor: Ma
     override fun onResponse(append: Boolean, articles: List<Article>) {
         val view = view ?: return
 
+        updateView(append, view, articles)
+    }
+
+    private fun updateView(append: Boolean, view: MainContract.View, articles: List<Article>) {
         if (append) {
             view.appendItems(articles)
             view.toggleLoadingProgress(false)

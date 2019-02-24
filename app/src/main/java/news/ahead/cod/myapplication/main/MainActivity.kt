@@ -20,9 +20,12 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         super.onCreate(savedInstanceState)
         setContentView(news.ahead.cod.myapplication.R.layout.activity_main)
 
+        initUI()
+    }
+
+    private fun initUI() {
         presenter.requestData()
         mainActivity_refreshControl.setOnRefreshListener { presenter.onRefresh() }
-
         mainActivity_recyclerView.addOnScrollListener(NewsScrollListener(
                 isRefreshing = { mainActivity_refreshControl.isRefreshing },
                 nextPageLoadHandler = { presenter.loadNextPage() }))
