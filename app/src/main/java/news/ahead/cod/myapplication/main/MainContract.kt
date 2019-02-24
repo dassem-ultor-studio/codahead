@@ -7,19 +7,22 @@ interface MainContract {
         fun onDestroy()
         fun onRefresh()
         fun requestData()
+        fun loadNextPage()
     }
 
     interface View {
-        fun toggleProgress(shouldShowProgress: Boolean)
+        fun toggleLoadingProgress(isLoading: Boolean)
+        fun toggleRefreshProgress(isRefreshing: Boolean)
         fun updateList(articles: List<Article>)
         fun onError(error: Throwable)
+        fun appendItems(articles: List<Article>)
     }
 
     interface Interactor {
-        fun latest(callback: ResponseCallback)
+        fun latest(append: Boolean, page: Int, callback: ResponseCallback)
 
         interface ResponseCallback {
-            fun onResponse(articles: List<Article>)
+            fun onResponse(append: Boolean, articles: List<Article>)
             fun onError(error: Throwable)
         }
     }
